@@ -24,9 +24,25 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 document.body.appendChild(renderer.domElement);
 
+const sphereGeometry = new THREE.SphereGeometry(0.5, 16, 16);
+const planeGeometry = new THREE.PlaneGeometry(1, 1);
+const octahedronGeometry = new THREE.OctahedronGeometry(0.5);
+
 /**
  * マテリアルセクション
  */
+const material = new THREE.MeshBasicMaterial();
+
+// メッシュ化
+const sphereMesh = new THREE.Mesh(sphereGeometry, material);
+sphereMesh.position.x = -1.5;
+
+const planeMesh = new THREE.Mesh(planeGeometry, material);
+
+const octahedronMesh = new THREE.Mesh(octahedronGeometry, material);
+octahedronMesh.position.x = 1.5;
+
+scene.add(sphereMesh, planeMesh, octahedronMesh);
 
 // マウス操作
 const controls = new OrbitControls(camera, renderer.domElement);
