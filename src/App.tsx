@@ -41,13 +41,17 @@ const basicMaterial = new THREE.MeshBasicMaterial({
   side: THREE.DoubleSide, // planeMeshで両面を可視化させる
 });
 
+const normalMaterial = new THREE.MeshNormalMaterial({
+  side: THREE.DoubleSide,
+});
+
 // メッシュ化
-const sphereMesh = new THREE.Mesh(sphereGeometry, basicMaterial);
+const sphereMesh = new THREE.Mesh(sphereGeometry, normalMaterial);
 sphereMesh.position.x = -1.5;
 
-const planeMesh = new THREE.Mesh(planeGeometry, basicMaterial);
+const planeMesh = new THREE.Mesh(planeGeometry, normalMaterial);
 
-const octahedronMesh = new THREE.Mesh(octahedronGeometry, basicMaterial);
+const octahedronMesh = new THREE.Mesh(octahedronGeometry, normalMaterial);
 octahedronMesh.position.x = 1.5;
 
 scene.add(sphereMesh, planeMesh, octahedronMesh);
