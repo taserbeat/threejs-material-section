@@ -1,8 +1,10 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
+import { TextureLoader } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 import "./App.css";
+import bricTextureUrl from "./assets/textures/brick.jpg";
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
@@ -28,18 +30,24 @@ const sphereGeometry = new THREE.SphereGeometry(0.5, 16, 16);
 const planeGeometry = new THREE.PlaneGeometry(1, 1);
 const octahedronGeometry = new THREE.OctahedronGeometry(0.5);
 
+// テクスチャ
+const bricTexture = new TextureLoader().load(bricTextureUrl);
+
 /**
  * マテリアルセクション
  */
-const material = new THREE.MeshBasicMaterial();
+const basicMaterial = new THREE.MeshBasicMaterial({
+  map: bricTexture,
+  side: THREE.DoubleSide, // planeMeshで両面を可視化させる
+});
 
 // メッシュ化
-const sphereMesh = new THREE.Mesh(sphereGeometry, material);
+const sphereMesh = new THREE.Mesh(sphereGeometry, basicMaterial);
 sphereMesh.position.x = -1.5;
 
-const planeMesh = new THREE.Mesh(planeGeometry, material);
+const planeMesh = new THREE.Mesh(planeGeometry, basicMaterial);
 
-const octahedronMesh = new THREE.Mesh(octahedronGeometry, material);
+const octahedronMesh = new THREE.Mesh(octahedronGeometry, basicMaterial);
 octahedronMesh.position.x = 1.5;
 
 scene.add(sphereMesh, planeMesh, octahedronMesh);
