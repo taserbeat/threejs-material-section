@@ -45,6 +45,17 @@ const normalMaterial = new THREE.MeshNormalMaterial({
   side: THREE.DoubleSide,
 });
 
+// 光源を追加
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+
+const pointLight = new THREE.PointLight(0xffffff, 1);
+pointLight.position.set(1, 2, 3);
+
+scene.add(ambientLight, pointLight);
+
+const pointLightHelper = new THREE.PointLightHelper(pointLight, 1);
+scene.add(pointLightHelper);
+
 // メッシュ化
 const sphereMesh = new THREE.Mesh(sphereGeometry, normalMaterial);
 sphereMesh.position.x = -1.5;
