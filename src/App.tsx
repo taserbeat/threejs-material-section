@@ -51,10 +51,15 @@ const standardMaterial = new THREE.MeshStandardMaterial({
   map: bricTexture,
 });
 
-// 光源を追加
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+const phongMaterial = new THREE.MeshPhongMaterial({
+  shininess: 100, //光の反射の強さ
+  specular: new THREE.Color("blue"),
+});
 
-const pointLight = new THREE.PointLight(0xffffff, 1);
+// 光源を追加
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+
+const pointLight = new THREE.PointLight(0xffffff, 0.7);
 pointLight.position.set(1, 2, 3);
 
 scene.add(ambientLight, pointLight);
@@ -63,12 +68,12 @@ const pointLightHelper = new THREE.PointLightHelper(pointLight, 1);
 scene.add(pointLightHelper);
 
 // メッシュ化
-const sphereMesh = new THREE.Mesh(sphereGeometry, standardMaterial);
+const sphereMesh = new THREE.Mesh(sphereGeometry, phongMaterial);
 sphereMesh.position.x = -1.5;
 
-const planeMesh = new THREE.Mesh(planeGeometry, standardMaterial);
+const planeMesh = new THREE.Mesh(planeGeometry, phongMaterial);
 
-const octahedronMesh = new THREE.Mesh(octahedronGeometry, standardMaterial);
+const octahedronMesh = new THREE.Mesh(octahedronGeometry, phongMaterial);
 octahedronMesh.position.x = 1.5;
 
 scene.add(sphereMesh, planeMesh, octahedronMesh);
