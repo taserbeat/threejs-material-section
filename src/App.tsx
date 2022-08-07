@@ -45,6 +45,12 @@ const normalMaterial = new THREE.MeshNormalMaterial({
   side: THREE.DoubleSide,
 });
 
+const standardMaterial = new THREE.MeshStandardMaterial({
+  roughness: 0.34,
+  metalness: 0.64,
+  map: bricTexture,
+});
+
 // 光源を追加
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
 
@@ -57,12 +63,12 @@ const pointLightHelper = new THREE.PointLightHelper(pointLight, 1);
 scene.add(pointLightHelper);
 
 // メッシュ化
-const sphereMesh = new THREE.Mesh(sphereGeometry, normalMaterial);
+const sphereMesh = new THREE.Mesh(sphereGeometry, standardMaterial);
 sphereMesh.position.x = -1.5;
 
-const planeMesh = new THREE.Mesh(planeGeometry, normalMaterial);
+const planeMesh = new THREE.Mesh(planeGeometry, standardMaterial);
 
-const octahedronMesh = new THREE.Mesh(octahedronGeometry, normalMaterial);
+const octahedronMesh = new THREE.Mesh(octahedronGeometry, standardMaterial);
 octahedronMesh.position.x = 1.5;
 
 scene.add(sphereMesh, planeMesh, octahedronMesh);
